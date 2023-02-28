@@ -1,0 +1,120 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Essence - Fashion World | Checkout</title>
+{% endblock%}
+{% block body %}
+
+<!-- ##### Breadcumb Area Start ##### -->
+<div class="breadcumb_area bg-img" style="background-image: url(/static/img/bg-img/breadcumb.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="page-title text-center">
+                    <h2>Checkout</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcumb Area End ##### -->
+
+<!-- ##### Checkout Area Start ##### -->
+<div class="checkout_area mt-2">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12 col-md-6">
+                <div class="order-details-confirmation">
+
+                    <div class="cart-page-heading">
+                        <h5 class="text-center">Billing Details</h5>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Name</th>
+                                <td>{{data.name}}</td>
+                            </tr>
+                            <tr>
+                                <th>User Name</th>
+                                <td>{{data.username}}</td>
+                            </tr>
+                            <tr>
+                                <th>Email Address</th>
+                                <td>{{data.email}}</td>
+                            </tr>
+                            <tr>
+                                <th>Phone Number</th>
+                                <td>{{data.phone}}</td>
+                            </tr>
+                            <var>
+                                <tr>
+                                    <th>Address Line 1</th>
+                                    <td>{{data.addressline1}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Address Line 2</th>
+                                    <td>{{data.addressline2}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Address Line 3</th>
+                                    <td>{{data.addressline3}}</td>
+                                </tr>
+                                <tr>
+                                    <th>PIN</th>
+                                    <td>{{data.pin}}</td>
+                                </tr>
+                                <tr>
+                                    <th>City</th>
+                                    <td>{{data.city}}</td>
+                                </tr>
+                                <tr>
+                                    <th>State</th>
+                                    <td>{{data.state}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><a href="/update-profile/"
+                                            class="btn btn-primary btn-sm w-100">Update Profile</a></td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-5 ml-lg-auto">
+                <div class="order-details-confirmation">
+
+                    <div class="cart-page-heading">
+                        <h5 class="text-center">Your Order</h5>
+                    </div>
+
+                    <ul class="order-details-form mb-4">
+                        <li><span>Product</span> <span>Total</span></li>
+                        {% for value in request.session.cart.values %}
+                        <li><span>{{value.name}}({{value.price}} X {{value.qty}})</span> <span>&#8377;{{value.total}}</span></li>
+                        {% endfor %}
+                        <li><span>Total</span> <span>&#8377;{{request.session.total}}</span></li>
+                        <li><span>Shipping</span> <span>&#8377;{{request.session.shipping}}</span></li>
+                        <li><span>Final Amount</span> <span>&#8377;{{request.session.final}}</span></li>
+                    </ul>
+                    <form action="/place-order/" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label>Payment Mode</label>
+                            <select name="mode" class="form-control">
+                                <option value="COD">COD</option>
+                                <option value="NetBanking">NetBanking/Card/UPI</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-primary w-100">Place Order</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Checkout Area End ##### -->
+{% endblock %}

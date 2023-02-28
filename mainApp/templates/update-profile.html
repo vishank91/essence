@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Essence - Fashion World | Update Profile</title>
+{% endblock%}
+{% block body %}
+<div class="container-fluid w-100 py-3">
+    <div class="center m-auto border p-5" style="width:85%">
+        <h6 class="text-center"><span class="text-primary" style="font-size: 25px;">Update</span> Your Profile</h6>
+        <form action="/update-profile/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" required class="form-control" name="name" id="name" placeholder="Enter Full Name : " value="{{data.name}}">
+                </div>
+                <div class="col-md-6">
+                    <label for="pic" class="form-label">Profile Pic</label>
+                    <input type="file" class="form-control" name="pic" id="pic">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" required class="form-control" name="email" id="email" placeholder="Enter Email Address : " value="{{data.email}}">
+                </div>
+                <div class="col-md-6">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" required class="form-control" name="phone" id="phone" placeholder="Enter Phone Number : " value="{{data.phone}}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="addressline1" class="form-label">Address Line 1</label>
+                    <input type="text" class="form-control" name="addressline1" id="addressline1"
+                        placeholder="Enter House Number, Floor Number or Building Number : " value="{{data.addressline1}}">
+                </div>
+                <div class="col-md-6">
+                    <label for="addressline2" class="form-label">Address Line 2</label>
+                    <input type="text" class="form-control" name="addressline2" id="addressline2"
+                        placeholder="Enter Stree Number or Near By : " value="{{data.addressline2}}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="addressline3" class="form-label">Address Line 3</label>
+                    <input type="text" class="form-control" name="addressline3" id="addressline3"
+                        placeholder="Enter Village or Locality : " value="{{data.addressline3}}">
+                </div>
+                <div class="col-md-6">
+                    <label for="pin" class="form-label">ZIP Code</label>
+                    <input type="text" class="form-control" name="pin" id="pin"
+                        placeholder="Enter Street Number or Near By : " value="{{data.pin}}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" class="form-control" name="city" id="city"
+                        placeholder="Enter City Name : " value="{{data.city}}">
+                </div>
+                <div class="col-md-6">
+                    <label for="state" class="form-label">State</label>
+                    <input type="text" class="form-control" name="state" id="state"
+                        placeholder="Enter State Name : " value="{{data.state}}">
+                </div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary w-100 btn-sm">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

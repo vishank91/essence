@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Essence - Fashion World | Product</title>
+{% endblock%}
+{% block body %}
+    <!-- ##### Single Product Details Area Start ##### -->
+    <section class="single_product_details_area d-flex align-items-center">
+
+        <!-- Single Product Thumb -->
+        <div class="single_product_thumb clearfix">
+            <div class="product_thumbnail_slides owl-carousel">
+                <img src="{{data.pic1.url}}" style="height:500px" width="100%" alt="">
+                <img src="{{data.pic2.url}}" style="height:500px" width="100%" alt="">
+                {% if data.pic3 %}
+                <img src="{{data.pic3.url}}" style="height:500px" width="100%" alt="">
+                {% endif %}
+                {% if data.pic4 %}
+                <img src="{{data.pic4.url}}" style="height:500px" width="100%" alt="">
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Single Product Description -->
+        <div class="single_product_desc clearfix">
+            <span>{{data.brand}}/{{data.maincategory}}/{{data.subcategory}}</span>
+            <a href="cart.html">
+                <h2>{{data.name}}</h2>
+            </a>
+            <p class="product-price"><span class="old-price">&#8377;{{data.baseprice}}</span> &#8377;{{data.finalprice}}</p>
+            <p class="product-price">Discount {{data.discount}}% Off</p>
+            <p class="product-desc">{{data.description}}</p>
+            <p class="product-desc d-flex justify-content-between">
+                <span>Color : {{data.color}}</span><span>Size : {{data.size}}</span>{% if data.stock %}<span>Stock : In Stock</span>{% else %}<span>Stock : Out Of Stock</span>{% endif %}
+            </p>
+            <!-- Form -->
+            <form class="cart-form clearfix" method="post">
+                <div class="cart-fav-box d-flex align-items-center">
+                    <!-- Cart -->
+                    {% if data.stock %}
+                    <a type="submit" href="/add-to-cart/{{data.id}}" name="addtocart" value="5" class="btn essence-btn text-light">Add to cart</a>
+                    {% endif %}
+                    <!-- Favourite -->
+                    <div class="product-favourite ml-4">
+                        <a href="/add-to-wishlist/{{data.id}}" class="favme fa fa-heart text-primary "> Add to Wishlist</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- ##### Single Product Details Area End ##### -->
+{% endblock %}

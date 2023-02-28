@@ -1,0 +1,70 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Essence - Fashion World | Contact</title>
+{% endblock%}
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-12">
+            <div class="mapouter">
+                <div class="gmap_canvas"><iframe width="100%" height="660" id="gmap_canvas"
+                        src="https://maps.google.com/maps?q=a-43%20noida%20sector%2016&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div>
+            </div>
+        </div>
+        <div class="col-md-4 col-12">
+            <div class="contact-info">
+                <h2>How to Find Us</h2>
+                <div class="contact-address mt-50">
+                    <p><span>address:</span>A-43, Ducat, Sector 16, Noida, 201301, UP, India</p>
+                    <p><span>telephone:</span> 9873848046</p>
+                    <p><a href="mailto:vishankchauhan@gmail.com">vishankchauhan@gmail.com</a></p>
+                </div>
+                <div>
+                    {% if messages %}
+                    {% for m in messages %}
+                    <div class="alert alert-success text-center alert-dismissible fade show" role="alert">
+                        {{m}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <form action="/contact/" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <!-- <label>Name</label> -->
+                            <input type="text" name="name" placeholder="Enter Name" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <!-- <label>Email</label> -->
+                            <input type="email" name="email" placeholder="Enter Email Address" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <!-- <label>Phone</label> -->
+                            <input type="text" name="phone" placeholder="Enter Contact Number" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <!-- <label>Subject</label> -->
+                            <textarea name="subject" rows="2" class="form-control"
+                                placeholder="Enter Subject"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <!-- <label>Message</label> -->
+                            <textarea name="message" rows="5" class="form-control"
+                                placeholder="Enter Message"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn essence-btn text-light w-100">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

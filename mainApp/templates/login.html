@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Essence - Fashion World | Login</title>
+{% endblock%}
+{% block body %}
+<div class="container-fluid w-100 py-3">
+    <div class="center w-50 m-auto border p-5">
+        <h6 class="text-center"><span class="text-primary" style="font-size: 25px;">Login</span> to Your Account</h6>
+        {% if messages %}
+            {% for m in messages %}
+            <div class="alert alert-danger text-center alert-dismissible fade show" role="alert">
+                {{m}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        {% endif %}
+        <form action="/login/" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username" class="form-label">UserName</label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Enter User Name : ">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password : ">
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary w-100 btn-sm">Login</button>
+            </div>
+        </form>
+        <div class="d-flex justify-content-between">
+            <a href="/forget-1/" class="text-primary">Forget Password</a>
+            <a href="/signup/" class="text-primary">New User?Create a Free Account</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

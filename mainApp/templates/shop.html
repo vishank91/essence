@@ -1,0 +1,210 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Essence - Fashion World | Shop</title>
+{% endblock%}
+{% block body %}
+    <!-- ##### Breadcumb Area Start ##### -->
+    <div class="breadcumb_area bg-img" style="background-image: url(/static/img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="page-title text-center">
+                        <h2>dresses</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Shop Grid Area Start ##### -->
+    <section class="shop_grid_area pt-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-3">
+                    <div class="shop_sidebar_area">
+
+                        <!-- ##### Single Widget ##### -->
+                        <div class="widget catagory mb-50">
+                            <!-- Widget Title -->
+                            <h6 class="widget-title mb-30">Catagories</h6>
+
+                            <!--  Catagories  -->
+                            <div class="catagories-menu">
+                                <ul id="menu-content2" class="menu-content collapse show">
+                                    <!-- Single Item -->
+                                    <li data-toggle="collapse" data-target="#maincategory">
+                                        <a href="#" class="text-dark">Maincategory</a>
+                                        <ul class="sub-menu collapse show" id="maincategory">
+                                            <li><a href="/shop/All/{{sc}}/{{br}}/">All</a></li>
+                                            {% for item in maincategory %}
+                                            <li><a href="/shop/{{item.name}}/{{sc}}/{{br}}/">{{item.name}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--  Catagories  -->
+                            <div class="catagories-menu">
+                                <ul id="menu-content2" class="menu-content collapse show">
+                                    <!-- Single Item -->
+                                    <li data-toggle="collapse" data-target="#subcategory">
+                                        <a href="#" class="text-dark">Subcategory</a>
+                                        <ul class="sub-menu collapse show" id="subcategory">
+                                            <li><a href="/shop/{{mc}}/All/{{br}}/">All</a></li>
+                                            {% for item in subcategory %}
+                                            <li><a href="/shop/{{mc}}/{{item.name}}/{{br}}/">{{item.name}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="catagories-menu">
+                                <ul id="menu-content2" class="menu-content collapse show">
+                                    <!-- Single Item -->
+                                    <li data-toggle="collapse" data-target="#brand">
+                                        <a href="#" class="text-dark">Brand</a>
+                                        <ul class="sub-menu collapse show" id="brand">
+                                            <li><a href="/shop/{{mc}}/{{sc}}/All/">All</a></li>
+                                            {% for item in brand %}
+                                            <li><a href="/shop/{{mc}}/{{sc}}/{{item.name}}/">{{item.name}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- ##### Single Widget ##### -->
+                        <div class="widget price mb-50">
+                            <!-- Widget Title -->
+                            <h6 class="widget-title mb-30">Filter by</h6>
+                            <!-- Widget Title 2 -->
+                            <p class="widget-title2 mb-30">Price</p>
+                            <div>
+                                <form action="/price-filter/{{mc}}/{{sc}}/{{br}}/" method="post" class="w-100">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-6 mb-3">
+                                            <label>Min</label>
+                                            <input type="number" name="min" value="0" min="0" class="form-control">
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label>Max</label>
+                                            <input type="number" name="max" value="1000" min="0" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <button type="submit" class="btn btn-light btn-sm w-100">Apply</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- ##### Single Widget ##### -->
+                        <!-- <div class="widget color mb-50">
+                            <p class="widget-title2 mb-30">Color</p>
+                            <div class="widget-desc">
+                                <ul class="d-flex">
+                                    <li><a href="#" class="color1"></a></li>
+                                    <li><a href="#" class="color2"></a></li>
+                                    <li><a href="#" class="color3"></a></li>
+                                    <li><a href="#" class="color4"></a></li>
+                                    <li><a href="#" class="color5"></a></li>
+                                    <li><a href="#" class="color6"></a></li>
+                                    <li><a href="#" class="color7"></a></li>
+                                    <li><a href="#" class="color8"></a></li>
+                                    <li><a href="#" class="color9"></a></li>
+                                    <li><a href="#" class="color10"></a></li>
+                                </ul>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-8 col-lg-9">
+                    <div class="shop_grid_product_area">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="product-topbar d-flex align-items-center justify-content-between">
+                                    <!-- Total Products -->
+                                    <div class="total-products">
+                                        <p><span>{{count}}</span> products found</p>
+                                    </div>
+                                    <!-- Sorting -->
+                                    <div class="product-sorting d-flex">
+                                        <p>Sort by:</p>
+                                        <form action="/sort-filter/{{mc}}/{{sc}}/{{br}}/" method="post">
+                                            {% csrf_token %}
+                                            <select name="sort" id="sortByselect">
+                                                <option value="Newest">Newest</option>
+                                                <option value="LTOH">Price: Low to High</option>
+                                                <option value="HTOL">Price: High to Low</option>
+                                            </select>
+                                             <button class="btn btn-light btn-sm">Apply</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            {% for item in data %}
+                            <!-- Single Product -->
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <div class="single-product-wrapper">
+                                    <!-- Product Image -->
+                                    <div class="product-img">
+                                        <img src="{{item.pic1.url}}" style="height:250px" alt="">
+                                        <!-- Hover Thumb -->
+                                        <img class="hover-img" src="{{item.pic2.url}}" style="height:250px" alt="">
+
+                                        <!-- Product Badge -->
+                                        <div class="product-badge offer-badge">
+                                            <span>-{{item.discount}}%</span>
+                                        </div>
+                                        <!-- Favourite -->
+                                        <!-- <div class="product-favourite">
+                                            <a href="#" class="favme fa fa-heart"></a>
+                                        </div> -->
+                                    </div>
+
+                                    <!-- Product Description -->
+                                    <div class="product-description">
+                                        <span>{{item.maincategory}}/{{item.subcategory}}</span>
+                                        <a href="/single-product/{{item.id}}/">
+                                            <h6>{{item.name}}</h6>
+                                        </a>
+                                        <p class="product-price"><span class="old-price">&#8377;{{item.baseprice}}</span>&#8377;{{item.finalprice}}</p>
+
+                                        <!-- Hover Content -->
+                                        <div class="hover-content">
+                                            <!-- Add to Cart -->
+                                            <div class="add-to-cart-btn">
+                                                <a href="/single-product/{{item.id}}/" class="btn essence-btn">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <nav aria-label="navigation">
+                        <ul class="pagination mt-50 mb-70">
+                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">...</a></li>
+                            <li class="page-item"><a class="page-link" href="#">21</a></li>
+                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Shop Grid Area End ##### -->
+{% endblock %}

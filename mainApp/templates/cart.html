@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Essence - Fashion World | Cart Page</title>
+{% endblock%}
+{% block body %}
+<div class="container-fluid">
+    {% if cart %}
+    <h5 class="text-center p-2">Your Cart</h5>
+    <div class="table-responsive">
+        <table class="table table-bordered text-center">
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Size</th>
+                <th>Price</th>
+                <th></th>
+                <th>Qty</th>
+                <th></th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+            {% for item in cart %}
+            <tr>
+                <td><img src="{{item.pic}}" style="height:70px;width:70px" class="rounded" alt=""></td>
+                <td>{{item.name}}</td>
+                <td>{{item.color}}</td>
+                <td>{{item.size}}</td>
+                <td>&#8377;{{item.price}}</td>
+                <td><a href="/update-cart/{{item.id}}/dec/"><span class="material-symbols-outlined">remove</span></a>
+                </td>
+                <td>{{item.qty}}</td>
+                <td><a href="/update-cart/{{item.id}}/inc/"><span class="material-symbols-outlined">add</span></a></td>
+                <td>&#8377;{{item.total}}</td>
+                <td><a href="/delete-cart/{{item.id}}"><span class="material-symbols-outlined">delete_forever</span></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Sub Total</th>
+                        <td>&#8377;{{total}}</td>
+                    </tr>
+                    <tr>
+                        <th>Shipping</th>
+                        <td>&#8377;{{shipping}}</td>
+                    </tr>
+                    <tr>
+                        <th>Final Amount</th>
+                        <td>&#8377;{{final}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><a href="/checkout/" class="btn btn-primary w-100 btn-sm">Checkout</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="text-center p-5">
+        <h3>No Items in Cart</h3>
+        <a href="/shop/All/All/All" class="btn btn-primary">Shop Now</a>
+    </div>
+    {% endif%}
+</div>
+{% endblock %}
